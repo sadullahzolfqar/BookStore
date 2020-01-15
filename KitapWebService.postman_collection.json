@@ -1,0 +1,415 @@
+{
+	"info": {
+		"_postman_id": "e1fc9e1d-7a95-4cee-a100-51115a59fd66",
+		"name": "KitapWebService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetAll Kategori",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/kategori",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"kategori"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Kategori",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"sKodu\": \"04\",\r\n        \"sAdi\": \"Kategori 4\",\r\n        \"dtCreate\": \"2020-01-08T00:00:00\",\r\n        \"dtLastUpdate\": \"2020-01-08T00:00:00\",\r\n        \"isDelet\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/kategori",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"kategori"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put Kategori",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"id\": 2,\r\n        \"sKodu\": \"02\",\r\n        \"sAdi\": \"Kategori 2 Update\",\r\n        \"dtCreate\": \"2020-01-09T00:00:00\",\r\n        \"dtLastUpdate\": \"2020-01-09T00:00:00\",\r\n        \"isDelet\": false\r\n},",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/kategori/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"kategori",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Kategori",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/kategori/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"kategori",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Kategori",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/kategori/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"kategori",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Yazar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"sAdi\": \"Merve\",\r\n        \"sSoyadi\": \"Alioglu\",\r\n        \"sTckn\": \"99882329281\",\r\n        \"sYazarHakkinda\": \"Yazar ilgili bilgileri Merve Yazardir.\",\r\n        \"dtDogumTarih\": \"1996-10-21T00:00:00\",\r\n        \"isDelet\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/Yazar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"Yazar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Yazar",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/api/Yazar",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"Yazar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Yazar",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/Yazar/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"Yazar",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put Yazar",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"id\": 4,\r\n        \"sAdi\": \"Ahmet\",\r\n        \"sSoyadi\": \"sadfes\",\r\n        \"sTckn\": \"99883329281\",\r\n        \"sYazarHakkinda\": \"Yazar ilgili bilgileri adsf Yazardir.\",\r\n        \"dtDogumTarih\": \"1996-10-21T00:00:00\",\r\n        \"isDelet\": false\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/Yazar/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"Yazar",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Yazar",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/Yazar/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"Yazar",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Kitap",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/kitap/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"kitap",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put Kitap",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 2,\r\n    \"sKitapAdi\": \"C# update Programming\",\r\n    \"sISBN\": \"8818273619280\",\r\n    \"sAciklama\": \"sseeww2210\",\r\n    \"dtYayinTarihi\": \"2018-01-20T00:00:00\",\r\n    \"ldKitapFiyat\": 89.99000000000000000000000000,\r\n    \"kategoriId\": 2,\r\n    \"kategori\": null,\r\n    \"yazarId\": 1,\r\n    \"yazar\": null,\r\n    \"isDelet\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/kitap/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"kitap",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save Kitap",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n       \r\n        \"sKitapAdi\": \"C# Programming\",\r\n        \"sISBN\": \"8818273619281\",\r\n        \"sAciklama\": \"sseeww2211\",\r\n        \"dtYayinTarihi\": \"2018-01-21T00:00:00\",\r\n        \"ldKitapFiyat\": 99.99,\r\n        \"kategoriId\": 8,\r\n        \"yazarId\": 10,\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/kitap",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"kitap"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAll Kitap",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/kitap",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"kitap"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Kitap",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/kitap/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"kitap",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

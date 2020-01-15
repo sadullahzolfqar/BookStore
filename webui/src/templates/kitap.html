@@ -1,0 +1,302 @@
+ <!-- Begin Page Content -->
+ <div class="container-fluid">
+
+    <!-- Page Heading -->
+    
+      <div style="margin-bottom: 10px;">
+        <a href="" data-toggle="modal" data-target="#exampleModalCenter"  class="btn btn-primary btn-icon-split">
+            <span class="icon text-white-50">
+              <i class="fas fa-plus"></i>
+            </span>
+            <span class="text">Yeni Kayıt Ekle</span>
+          </a>
+          
+      </div>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Kitaplar Listesi</h6>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+            <table st-table="rowListOfItems" st-safe-src="ListOfItems" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th st-sort="sKitapAdi">KitapAdı</th>
+                    <th st-sort="sISBN">ISBN</th>
+                    <th st-sort="dtYayinTarihi">Yayin Tarih</th>
+                    <th st-sort="ldKitapFiyat">Fiyat</th>
+                    <th st-sort="kategoriId">Kategori</th>
+                    <th>Yazar</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th>
+                        <input st-search="sKitapAdi" placeholder="Kitap Adı Ara" class="input-sm form-control" type="search"/>
+                    </th>
+                    <th colspan="6">
+                        <input st-search placeholder="Arama" class="input-sm form-control" type="search"/>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="row in rowListOfItems">
+                    <td>{{row.sKitapAdi}}</td>
+                    <td>{{row.sISBN}}</td>
+                    <td>{{row.dtYayinTarihi | date}}</td>
+                    <td>{{row.ldKitapFiyat}}</td>
+                    <td>{{row.kategori.sAdi}}</td>
+                    <td>{{row.yazar.sAdi+" "+row.yazar.sSoyadi}}</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="...">
+                          <button type="button" ng-click="GetItemForUpdate(row.id)" class="btn btn-primary"><i class="fa fa-edit">
+                            </i></button>
+                          <button type="button" ng-click="DeleteItem(row.id)" class="btn btn-danger"><i class="fa fa-trash-alt">
+                            </i></button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="7" class="text-center">
+                            <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- /.container-fluid -->
+
+
+
+<!-- line modal -->
+
+ <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Kitap Kayıt Formu</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form ng-submit="AddItem()">
+            <div class="modal-body">
+
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="_sKitapAdi">Kitap Adı <span class="text-danger">*</span></label>
+                    <input type="text" ng-model="sKitapAdi" class="form-control" id="_sKitapAdi" placeholder="Kitap Adı Giriniz" required>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="_sISBN">ISBN <span class="text-danger">*</span></label>
+                    <input type="text" ng-model="sISBN" class="form-control" id="_sISBN" placeholder="ISBN Giriniz" required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="_ldKitapFiyat">Kitap Fiyat <span class="text-danger">*</span> </label>
+                    <input type="number" step=".01" ng-model="ldKitapFiyat" class="form-control" id="_ldKitapFiyat" required>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="_dtYayinTarihi">Yayin Tarih <span class="text-danger">*</span></label>
+                    <input type="date" ng-model="dtYayinTarihi" class="form-control" id="_dtYayinTarihi"required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label for="_kategoriId">Kategori Seç</label>
+                      <a href="" class="float-right">Yeni Ekle</a>
+                      <ui-select ng-model="kategori.selected" ng-required="true" theme="select2" style="width:100%" required>
+                        <ui-select-match placeholder="Kitap Kategorisi Seçiniz...">{{$select.selected.sAdi}}</ui-select-match>
+                        <ui-select-choices repeat="item in Kategoriler | filter: $select.search">
+                          <div ng-bind-html="item.sAdi | highlight: $select.search"></div>
+                          <small ng-bind-html="item.sKodu | highlight: $select.search"></small>
+                        </ui-select-choices>
+                      </ui-select>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label for="_dtDogumTarih">Yazar Seç<span class="text-danger">*</span></label>
+                      <a href="" class="float-right">Yeni Ekle</a>
+                      <ui-select ng-model="yazar.selected" ng-required="true" theme="select2" style="width:100%" required>
+                        <ui-select-match placeholder="Yazar Seçiniz...">{{$select.selected.sAdi +" "+$select.selected.sSoyadi}}</ui-select-match>
+                        <ui-select-choices repeat="item in Yazarlar | filter: $select.search">
+                          <div ng-bind-html="item.sAdi +' '+item.sSoyadi | highlight: $select.search"></div>
+                          <small ng-bind-html="item.sTckn | highlight: $select.search"></small>
+                        </ui-select-choices>
+                      </ui-select>
+                  </div>
+                  </div>
+              </div>
+                    <div class="form-group">
+                       <label for="_sAciklama">Kitap Hakkında</label>
+                        <textarea class="form-control" id="_sAciklama" ng-model="sAciklama">
+                          Kitap Hakkında
+                        </textarea>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                <button type="submit" class="btn btn-primary">Kaydet</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  
+</div>
+
+<div class="modal fade" id="UpdateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Kitap Güncelleme Formu</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form ng-submit="UpdateItem()">
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="_UsKitapAdi">Kitap Adı <span class="text-danger">*</span></label>
+                  <input type="text" ng-model="UsKitapAdi" class="form-control" id="_UsKitapAdi" placeholder="Kitap Adı Giriniz" required>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="_UsISBN">ISBN <span class="text-danger">*</span></label>
+                  <input type="text" ng-model="UsISBN" class="form-control" id="_UsISBN" placeholder="ISBN Giriniz" required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="_UldKitapFiyat">Kitap Fiyat <span class="text-danger">*</span> </label>
+                  <input type="number" step=".01" ng-model="UldKitapFiyat" class="form-control" id="_UldKitapFiyat" required>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="_dtYayinTarihi">Yayin Tarih <span class="text-danger">*</span></label>
+                  <input type="date" ng-model="UdtYayinTarihi" class="form-control" id="_UdtYayinTarihi"required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="">Kategori Seç</label>
+                    <a href="" class="float-right">Yeni Ekle</a>
+                    <ui-select ng-model="Ukategori.selected" ng-required="true" theme="select2" style="width:100%" required>
+                      <ui-select-match placeholder="Kitap Kategorisi Seçiniz...">{{$select.selected.sAdi}}</ui-select-match>
+                      <ui-select-choices repeat="item in Kategoriler | filter: $select.search">
+                        <div ng-bind-html="item.sAdi | highlight: $select.search"></div>
+                        <small ng-bind-html="item.sKodu | highlight: $select.search"></small>
+                      </ui-select-choices>
+                    </ui-select>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="">Yazar Seç<span class="text-danger">*</span></label>
+                    <a href="" class="float-right">Yeni Ekle</a>
+                    <ui-select ng-model="Uyazar.selected" ng-required="true" theme="select2" style="width:100%" required>
+                      <ui-select-match placeholder="Yazar Seçiniz...">{{$select.selected.sAdi +" "+$select.selected.sSoyadi}}</ui-select-match>
+                      <ui-select-choices repeat="item in Yazarlar | filter: $select.search">
+                        <div ng-bind-html="item.sAdi +' '+item.sSoyadi | highlight: $select.search"></div>
+                        <small ng-bind-html="item.sTckn | highlight: $select.search"></small>
+                      </ui-select-choices>
+                    </ui-select>
+                </div>
+                </div>
+            </div>
+                  <div class="form-group">
+                     <label for="_UsAciklama">Kitap Hakkında</label>
+                      <textarea class="form-control" id="_UsAciklama" ng-model="UsAciklama">
+                        Kitap Hakkında
+                      </textarea>
+                  </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+              <button type="submit" class="btn btn-primary">Güncelle</button>
+          </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+<style>
+.ui-select-focusser{
+  display: none;
+}
+.select2-result-single{
+  padding-left: 0;
+}
+
+.pagination > li > a,
+.pagination > li > span {
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  margin-left: -1px;
+  line-height: 1.42857143;
+  color: #337ab7;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+.pagination > li:first-child > a,
+.pagination > li:first-child > span {
+  margin-left: 0;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+  z-index: 2;
+  color: #23527c;
+  background-color: #eee;
+  border-color: #ddd;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  z-index: 3;
+  color: #fff;
+  cursor: default;
+  background-color: #337ab7;
+  border-color: #337ab7;
+}
+
+
+</style>
